@@ -1,5 +1,7 @@
 
-body { background-color: #F2F6D0 }
+body { 
+  font-family: 'PT Serif', serif;
+}
 #wrapper {
   width: 960px;
   margin-left: auto;

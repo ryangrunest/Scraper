@@ -1,11 +1,27 @@
 // Grab the articles as a json
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-  }
-});
+console.log(localStorage.getItem('term'));
+if ( localStorage.getItem('term') != null ) {
+  $.getJSON("/articles/" + localStorage.getItem('term'), function(data) {
+    // For each one
+    for (var i = 0; i < data.length; i++) {
+      // Display the apropos information on the page
+      $("#articles").append(`<p data-id='${data[i]._id}'>${data[i].title}<br /><a href="${data[i].link}"> Link to Ad</a></p>`);
+    }
+  });
+}
+
+
+$(document).on('click', 'button', () => {
+  localStorage.setItem('term', event.target.id);
+  // alert(event.target.id);
+  $.ajax({
+    method: 'GET',
+    url: '/scrape/' + event.target.id
+  })
+  .then(data => {
+    window.location.reload();
+  })
+})
 
 
 // Whenever someone clicks a p tag
@@ -18,10 +34,10 @@ $(document).on("click", "p", function() {
   // Now make an ajax call for the Article
   $.ajax({
     method: "GET",
-    url: "/articles/" + thisId
+    url: "/article/" + thisId
   })
     // With that done, add the note information to the page
-    .then(function(data) {
+    .then(data => {
       console.log(data);
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");

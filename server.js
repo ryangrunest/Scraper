@@ -32,49 +32,55 @@ mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true 
 // Routes
 
 // A GET route for scraping the echoJS website
-app.get("/scrape", function(req, res) {
+app.get("/scrape/:id", function(req, res) {
+  console.log(req.params.id);
   // First, we grab the body of the html with axios
-  axios.get("https://portland.craigslist.org/search/mca?query=sportster").then(function(response) {
+  axios.get(`https://portland.craigslist.org/search/mca?query=${req.params.id}`).then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     let $ = cheerio.load(response.data);
     // console.log(response.data);
-    console.log($('li.result-row').children('a.result-image').attr('href'));
+    console.log($('li.result-row').children('.result-info').children('.result-meta').children('.result-price').text());
 
-    // Now, we grab every h2 within an article tag, and do the following:
-  //   $("li.result-row").each(function(i, element) {
-  //     // Save an empty result object
-  //     let result = {};
-  //     console.log($(this).children('.result-price'));
+   // grab every posting from the page
+    $("li.result-row").each(function(i, element) {
+      // Save an empty result object
+      let result = {};
 
-  //     // // Add the text and href of every link, and save them as properties of the result object
-            result.title = $(this)
-              .children("a.result-image")
-              .attr('href');
-  //     // result.link = $(this)
-  //     //   .children(".result-title")
-  //     //   .attr('href');
+      // Add the text and href of every link, and save them as properties of the result object
+      result.title = $(this)
+        .children(".result-info")
+        .children('a.result-title')
+        .text();
+      result.link = $(this)
+        .children(".result-image")
+        .attr('href');
+      result.price = $(this)
+        .children('.result-info')
+        .children('.result-meta')
+        .children('.result-price')
+        .text();
+      result.identifier = req.params.id;
+      // Create a new Article using the `result` object built from scraping
+      db.Article.create(result)
+        .then(function(dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          // If an error occurred, log it
+          console.log(err);
+        });
+    });
 
-  //     // // Create a new Article using the `result` object built from scraping
-  //     // db.Article.create(result)
-  //     //   .then(function(dbArticle) {
-  //     //     // View the added result in the console
-  //     //     console.log(dbArticle);
-  //     //   })
-  //     //   .catch(function(err) {
-  //     //     // If an error occurred, log it
-  //     //     console.log(err);
-  //     //   });
-  //   });
-
-  //   // Send a message to the client
-  //   res.send("Scrape Complete");
+   // Send a message to the client
+    res.send("Scrape Complete");
   });
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
+app.get("/articles/:id", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({ identifier: req.params.id })
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
@@ -86,7 +92,7 @@ app.get("/articles", function(req, res) {
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
-app.get("/articles/:id", function(req, res) {
+app.get("/article/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
     // ..and populate all of the notes associated with it
