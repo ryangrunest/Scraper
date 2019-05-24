@@ -10,18 +10,27 @@ if ( localStorage.getItem('term') != null ) {
   });
 }
 
+$('#srch-submit').on('click', () => {
+  event.preventDefault();
+  const category = $('#srch-category').val();
+  const criteria = $('#srch-criteria').val();
+});
 
-$(document).on('click', 'button', () => {
-  localStorage.setItem('term', event.target.id);
+
+
+// $(document).on('click', 'button', () => {
+
+
+  // localStorage.setItem('term', event.target.id);
   // alert(event.target.id);
-  $.ajax({
-    method: 'GET',
-    url: '/scrape/' + event.target.id
-  })
-  .then(data => {
-    window.location.reload();
-  })
-})
+  // $.ajax({
+  //   method: 'GET',
+  //   url: '/scrape/' + event.target.id
+  // })
+  // .then(data => {
+  //   window.location.reload();
+  // })
+// })
 
 
 // Whenever someone clicks a p tag
