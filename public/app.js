@@ -10,10 +10,36 @@ if ( localStorage.getItem('term') != null ) {
   });
 }
 
+// function for checking search category and storing them as correct search results for ajax request
+checkCategory = category =>  {
+  let searchCategory;
+  if (category === null) {
+    searchCategory = '';
+  } else if (category === 'Motorycles') {
+    searchCategory = 'mca';
+  } else if (category === 'Furniture') {
+    searchCategory = 'fua';
+  } else if (category === 'Musical Instruments') {
+    searchCategory = 'msa';
+  }
+  return searchCategory;
+}
+
+// ajax request for scraping craigslist
 $('#srch-submit').on('click', () => {
   event.preventDefault();
-  const category = $('#srch-category').val();
+  console.log($('#srch-category').val());
+  const category = checkCategory($('#srch-category').val());
   const criteria = $('#srch-criteria').val();
+  // console.log(category);
+
+  // $.ajax({
+  //   method: 'GET',
+  //   url: `/scrape/${category}/${criteria}`
+  // }).then(data => {
+  //   console.log(data);
+  //   window.location.reload();
+  // })
 });
 
 
@@ -47,7 +73,7 @@ $(document).on("click", "p", function() {
   })
     // With that done, add the note information to the page
     .then(data => {
-      console.log(data);
+      // console.log(data);
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");
       // An input to enter a new title
