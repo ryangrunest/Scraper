@@ -9,23 +9,26 @@
   </head>
   <body>
     <!-- As a heading -->
-    <nav class="navbar navbar-light bg-light row">
-      <div class="col text-left">
-        <div>by <i>Ryan Grunest</i></div>
-      </div>
-      <div class="col text-center">
-        <div class="navbar-brand ml-3">CraigScraper</div>
-      </div>
-      <div class="col text-right">
-        <div>Tailored Craigslist Searches</div>
-      </div>
-    </nav>
+    <div class="container-fluid">
+        <nav class="navbar navbar-light bg-light row">
+            <div class="col text-left">
+              <div>by <i>Ryan Grunest</i></div>
+            </div>
+            <div class="col text-center">
+              <div class="navbar-brand ml-3">CraigScraper</div>
+            </div>
+            <div class="col text-right">
+              <div>Tailored Craigslist Searches</div>
+            </div>
+          </nav>
+    </div>
+    
     <div class="container">
       <div id="wrapper">
         
         <h4 class="is-underlined text-center">Search Criteria</h4>
         <div class="row">
-          <div class="col-12 col-md-4 text-left">
+          <div class="col-12 col-md-4 text-left mt-4">
               <select class="form-control form-control-md">
                 <option>Category</option>
                 <option>Motorcycles</option>
@@ -33,19 +36,24 @@
                 <option>Musical Instruments</option>
               </select>
           </div>
-          <div class="col-12 col-md-4">
-              <button type="button" class="btn btn-light" id="sportster">Sportster</button>
-              <button type="button" class="btn btn-light" id="triumph">Triumph</button>
-              <button type="button" class="btn btn-light" id="cafe">Café Racer</button>
+          <div class="col-12 col-md-4 mt-4">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="col-12 col-md-4 mt-4">
+              <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
             
       </div>
-      
-      
-      <div id="articles"></div>
-      <div id="notes"></div>
     </div>
+      
+    <div class="container">
+        <div id="articles"></div>
+        <div id="notes"></div>
+    </div>
+      
+      
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
