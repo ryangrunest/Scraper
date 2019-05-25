@@ -36,7 +36,8 @@ app.get("/scrape/:category/:criteria", function(req, res) {
   console.log(req.params.category);
   console.log(req.params.criteria);
   // First, we grab the body of the html with axios
-  axios.get(`https://portland.craigslist.org/search/mca?query=${req.params.criteria}`).then(function(response) {
+  axios.get(`https://portland.craigslist.org/search/${req.params.category}?query=${req.params.criteria}`)
+    .then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     let $ = cheerio.load(response.data);
     // console.log(response.data);
@@ -60,7 +61,8 @@ app.get("/scrape/:category/:criteria", function(req, res) {
         .children('.result-meta')
         .children('.result-price')
         .text();
-      result.identifier = req.params.id;
+      result.category = req.params.category;
+      result.criteria = req.params.criteria;
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
         .then(function(dbArticle) {
@@ -79,9 +81,9 @@ app.get("/scrape/:category/:criteria", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-app.get("/articles/:id", function(req, res) {
+app.get("/articles/:category/:criteria", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({ identifier: req.params.id })
+  db.Article.find({ category: req.params.category, criteria: req.params.criteria })
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);

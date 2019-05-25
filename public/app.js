@@ -1,17 +1,18 @@
-// Grab the articles as a json
-console.log(localStorage.getItem('term'));
-if ( localStorage.getItem('term') != null ) {
-  $.getJSON("/articles/" + localStorage.getItem('term'), function(data) {
-    // For each one
+// grab articles from db based on localstorage terms
+console.log(localStorage.getItem('category'));
+console.log(localStorage.getItem('criteria'));
+
+if ( localStorage.getItem('category') != null ) {
+  $.getJSON(`/articles/${localStorage.getItem('category')}/${localStorage.getItem('criteria')}`, data => {
+    // append articles to page on load
     for (var i = 0; i < data.length; i++) {
-      // Display the apropos information on the page
-      $("#articles").append(`<p data-id='${data[i]._id}'>${data[i].title}<br /><a href="${data[i].link}"> Link to Ad</a></p>`);
+      $("#articles").append(`<p data-id='${data[i]._id}'>${data[i].title}<br /><a href="${data[i].link}"> Link to Ad</a><br /> ${data[i].price}</p>`);
     }
   });
 }
 
 // function for checking search category and storing them as correct search results for ajax request
-checkCategory = category =>  {
+checkCategory = category => {
   let searchCategory;
   if (category === null) {
     searchCategory = '';
@@ -27,19 +28,26 @@ checkCategory = category =>  {
 
 // ajax request for scraping craigslist
 $('#srch-submit').on('click', () => {
+  console.log('button clicked!');
   event.preventDefault();
   console.log($('#srch-category').val());
   const category = checkCategory($('#srch-category').val());
   const criteria = $('#srch-criteria').val();
+  console.log(`category is ${category}`);
+  console.log(criteria);
+
+  // set localstorage values so when page reloads, ajax request gets search fields from db
+  localStorage.setItem('category', category);
+  localStorage.setItem('criteria', criteria);
   // console.log(category);
 
-  // $.ajax({
-  //   method: 'GET',
-  //   url: `/scrape/${category}/${criteria}`
-  // }).then(data => {
-  //   console.log(data);
-  //   window.location.reload();
-  // })
+  $.ajax({
+    method: 'GET',
+    url: `/scrape/${category}/${criteria}`
+  }).then(data => {
+    console.log('retrieved data!');
+    window.location.reload();
+  })
 });
 
 
