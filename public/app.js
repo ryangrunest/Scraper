@@ -4,13 +4,24 @@
 
 if ( localStorage.getItem('category') != null ) {
 
-  console.log('getting data!');
+  $('#articles').text('');
+
   $.getJSON(`/articles/${localStorage.getItem('category')}/${localStorage.getItem('criteria')}`, data => {
-    console.log(data);
-    // append articles to page on load
-    for (var i = 0; i < data.length; i++) {
-      $("#articles").append(`<p class="a-link" data-id='${data[i]._id}'><a href="${data[i].link}"> ${data[i].title} - ${data[i].price}</a><br /></p>`);
+    // if search didn't return anything
+    if (data.length < 1) {
+      $('#articles').append('<h2 class=>Nothing returned. Try another search?</h2>');
+    } else {
+      // append articles to page on load
+      for (var i = 0; i < data.length; i++) {
+        let row = $('<div>').attr('class', 'row a-link my-3');
+        let content = $('<div>').attr('class', 'col-9 text-left pl-4 retrieved-content').attr('data-id', data[i]._id).html(`<a href="${data[i].link}"> ${data[i].title}</a>`);
+        let price = $('<div>').attr('class', 'col-3 text-right pr-4 retrieved-price').text(data[i].price);
+        row.append(content,price);
+        $("#articles").append(row);
+        // $("#articles").append(`<div class="a-link my-2" data-id='${data[i]._id}'> - ${data[i].price}</div>`);
+      }
     }
+    
   });
 }
 

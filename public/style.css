@@ -2,7 +2,11 @@
 body { 
   font-family: 'Karla', sans-serif;
   color: white !important;
-  background: #FFFEFF;
+  background: url(/imgs/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 textarea, input {
   display: block;
@@ -27,12 +31,17 @@ a:hover {
 .is-underlined {
   text-decoration: underline;
 }
+.dark {
+  color: #171F26;
+}
 .navbar {
-  background: #0D4F8C !important;
-  border-bottom: 1px solid black;
+  background: #171F26 !important;
+  /* border-bottom: 1px solid white; */
 }
 .navbar-brand {
   color: white;
+  font-size: 1.2rem;
+  margin-left: 11.5em;
 }
 .btn {
   background-color: #0D4F8C;
@@ -52,21 +61,23 @@ a:hover {
 #articles {
   display: inline-block;
   overflow: auto;
-  width: 60%;
-  height: 700px;
+  width: 56.5%;
+  height: 450px;
+  margin-left: 6.9%;
 }
 .a-link {
-  background: #0D4F8C;
+  background: #171F26;
   color: white;
   padding: 0.5rem;
-  border-radius: 10px;
-  text-align: center;
+  /* border-radius: 25px; */
+  text-align: left;
   -webkit-transition: box-shadow 0.3s; /* Safari */
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.7s;
 }
 .a-link:hover {
   cursor: pointer;
   box-shadow: 0 8px 6px -6px black;
+  transform: translateY( 3px );
 }
 #notes {
   float: right;
