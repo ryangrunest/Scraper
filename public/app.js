@@ -9,7 +9,7 @@ if ( localStorage.getItem('category') != null ) {
     console.log(data);
     // append articles to page on load
     for (var i = 0; i < data.length; i++) {
-      $("#articles").append(`<p data-id='${data[i]._id}'>${data[i].title}<br /><a href="${data[i].link}"> Link to Ad</a><br /> ${data[i].price}</p>`);
+      $("#articles").append(`<p class="a-link" data-id='${data[i]._id}'><a href="${data[i].link}"> ${data[i].title} - ${data[i].price}</a><br /></p>`);
     }
   });
 }
