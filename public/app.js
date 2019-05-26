@@ -32,21 +32,30 @@ checkCategory = category => {
 // ajax request for scraping craigslist
 $('#srch-submit').on('click', () => {
   event.preventDefault();
-  const category = checkCategory($('#srch-category').val());
-  const criteria = $('#srch-criteria').val();
+  if ($('#srch-criteria').val() == false) {
+    $('#srch-criteria').popover('show');
+    setTimeout( () => {
+      $('#srch-criteria').popover('hide');
+    }, 2000);
+  } else {
+    const category = checkCategory($('#srch-category').val());
+    const criteria = $('#srch-criteria').val();
 
-  // set localstorage values so when page reloads, ajax request gets search fields from db
-  localStorage.setItem('category', category);
-  localStorage.setItem('criteria', criteria);
-  // console.log(category);
+    // set localstorage values so when page reloads, ajax request gets search fields from db
+    localStorage.setItem('category', category);
+    localStorage.setItem('criteria', criteria);
+    // console.log(category);
 
-  $.ajax({
-    method: 'GET',
-    url: `/scrape/${category}/${criteria}`
-  }).then(data => {
-    console.log('retrieved data!');
-    window.location.reload();
-  })
+    $.ajax({
+      method: 'GET',
+      url: `/scrape/${category}/${criteria}`
+    }).then(data => {
+      console.log('retrieved data!');
+      window.location.reload();
+    });
+    $('#submit-btn-container').html('<div class="loader">Loading...</div>');
+  }
+  
 });
 
 

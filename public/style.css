@@ -1,8 +1,8 @@
 
 body { 
-  font-family: 'PT Serif', serif;
-  color: #171F26 !important;
-  background: #FFF7F8;
+  font-family: 'Karla', sans-serif;
+  color: white !important;
+  background: #FFFEFF;
 }
 textarea, input {
   display: block;
@@ -19,7 +19,7 @@ textarea {
 }
 a {
   text-decoration: none;
-  color: #171F26;
+  color: white;
 }
 a:hover {
   color: #D9C5C1;
@@ -28,16 +28,19 @@ a:hover {
   text-decoration: underline;
 }
 .navbar {
-  background: #F2EBEC !important;
+  background: #0D4F8C !important;
+  border-bottom: 1px solid black;
 }
 .navbar-brand {
-  color: #171F26;
+  color: white;
 }
 .btn {
-  background-color: #F2EBEC;
+  background-color: #0D4F8C;
+  color: white;
+  transition: background-color 0.5s;
 }
 .btn:hover {
-  background-color: #A6948A;
+  background-color: #082C5C;
   color: white;
 }
 #wrapper {
@@ -53,16 +56,62 @@ a:hover {
   height: 700px;
 }
 .a-link {
-  background: #F2EBEC;
+  background: #0D4F8C;
   color: white;
   padding: 0.5rem;
   border-radius: 10px;
   text-align: center;
+  -webkit-transition: box-shadow 0.3s; /* Safari */
+  transition: box-shadow 0.3s;
 }
 .a-link:hover {
   cursor: pointer;
+  box-shadow: 0 8px 6px -6px black;
 }
 #notes {
   float: right;
   width: 30%;
+}
+
+/* loader css */
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+.loader {
+  margin: 0px 10px;
+  font-size: 5px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid #171F26;
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #171F26;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

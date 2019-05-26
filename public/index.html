@@ -12,14 +12,8 @@
     <!-- As a heading -->
     <div class="container-fluid">
         <nav class="navbar row">
-            <div class="col text-left">
-              <div>by <i>Ryan Grunest</i></div>
-            </div>
             <div class="col text-center">
-              <div class="navbar-brand ml-3">CraigScraper</div>
-            </div>
-            <div class="col text-right">
-              <div>Tailored Craigslist Searches</div>
+              <div class="navbar-brand ml-3">CraigScraper: Tailored Craigslist Searches</div>
             </div>
           </nav>
     </div>
@@ -38,9 +32,9 @@
               </select>
           </div>
           <div class="col-12 col-md-4 mt-4">
-              <input type="text" class="form-control" id="srch-criteria" placeholder="Search Criteria">
+              <input type="text" class="form-control" id="srch-criteria" placeholder="Search Criteria" required data-container="body" data-toggle="popover" data-placement="bottom" data-content="Enter something to search for! i.e Triumph, chair, furry friend">
           </div>
-          <div class="col-12 col-md-4 mt-4">
+          <div class="col-12 col-md-4 mt-4" id="submit-btn-container">
               <button id="srch-submit" type="submit" class="btn">Submit</button>
           </div>
         </div>
