@@ -1,9 +1,12 @@
 // grab articles from db based on localstorage terms
-console.log(localStorage.getItem('category'));
-console.log(localStorage.getItem('criteria'));
+// console.log(localStorage.getItem('category'));
+// console.log(localStorage.getItem('criteria'));
 
 if ( localStorage.getItem('category') != null ) {
+
+  console.log('getting data!');
   $.getJSON(`/articles/${localStorage.getItem('category')}/${localStorage.getItem('criteria')}`, data => {
+    console.log(data);
     // append articles to page on load
     for (var i = 0; i < data.length; i++) {
       $("#articles").append(`<p data-id='${data[i]._id}'>${data[i].title}<br /><a href="${data[i].link}"> Link to Ad</a><br /> ${data[i].price}</p>`);
@@ -16,7 +19,7 @@ checkCategory = category => {
   let searchCategory;
   if (category === null) {
     searchCategory = '';
-  } else if (category === 'Motorycles') {
+  } else if (category === 'Motorcycles') {
     searchCategory = 'mca';
   } else if (category === 'Furniture') {
     searchCategory = 'fua';
@@ -28,13 +31,9 @@ checkCategory = category => {
 
 // ajax request for scraping craigslist
 $('#srch-submit').on('click', () => {
-  console.log('button clicked!');
   event.preventDefault();
-  console.log($('#srch-category').val());
   const category = checkCategory($('#srch-category').val());
   const criteria = $('#srch-criteria').val();
-  console.log(`category is ${category}`);
-  console.log(criteria);
 
   // set localstorage values so when page reloads, ajax request gets search fields from db
   localStorage.setItem('category', category);

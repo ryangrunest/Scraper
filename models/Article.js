@@ -20,7 +20,11 @@ const ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  identifier: {
+  category: {
+    type: String,
+    required: true
+  },
+  criteria: {
     type: String,
     required: true
   },
