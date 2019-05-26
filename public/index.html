@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>CraigScrape</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -10,20 +11,21 @@
   </head>
   <body>
     <!-- As a heading -->
-    <div class="container-fluid">
-        <nav class="navbar row">
-            <div class="col p-0 m-0">
-              <div class="navbar-brand mr-0 py-3"><i class="fas fa-air-freshener"></i> CraigScraper: Tailored Craigslist Searches</div>
+    <section>
+          <nav class="navbar">
+            <div class="container">
+                <div class="p-0 m-0">
+                    <div class="navbar-brand mr-0 py-3"><i class="fas fa-air-freshener"></i> CraigScraper: Tailored Craigslist Searches</div>
+                </div>
             </div>
-          </nav>
-    </div>
+              
+            </nav>
+    </section>
     
-    <div class="container">
-      <div id="wrapper">
-        
-        <h4 class="is-underlined text-center">Search Criteria</h4>
+    <section class="mt-5">
+      <div class="container">
         <div class="row">
-          <div class="col-12 col-md-4 text-left mt-4">
+          <div class="col-12 col-lg-4 text-left mt-4">
               <select class="form-control form-control-md" id="srch-category">
                 <option disabled>Category</option>
                 <option>Motorcycles</option>
@@ -31,23 +33,22 @@
                 <option>Musical Instruments</option>
               </select>
           </div>
-          <div class="col-12 col-md-4 mt-4">
+          <div class="col-12 col-lg-4 mt-4">
               <input type="text" class="form-control" id="srch-criteria" placeholder="Search Criteria" required data-container="body" data-toggle="popover" data-placement="bottom" data-content="Enter something to search for! i.e Triumph, chair, furry friend">
           </div>
-          <div class="col-12 col-md-4 mt-4" id="submit-btn-container">
+          <div class="col-12 col-lg-4 mt-4" id="submit-btn-container">
               <button id="srch-submit" type="submit" class="btn">Submit</button>
           </div>
-        </div>
-            
+        </div> 
       </div>
-    </div>
+    </section>
       
-    <div class="container mt-5">
-        <div id="articles"></div>
-        <div id="notes">
-          <h2 class="mt-2">Click on an article to create and save a note!</h2>
-        </div>
-    </div>
+    <section>
+      <div class="container mt-5">
+          <div id="articles"></div>
+      </div>
+    </section>
+    
       
       
     
