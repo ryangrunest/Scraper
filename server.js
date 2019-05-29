@@ -13,7 +13,7 @@ const cheerio = require("cheerio");
 // Require all models
 const db = require("./models");
 // require mongodb_uri
-const mongo_uri = require('./keys/key.js')
+const keys = require('./keys/key.js')
 
 const PORT = process.env.PORT || 3000;
 
@@ -30,10 +30,9 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const MONGODB_URI = mongo_uri.mongo_uri;
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).then(() => {
+mongoose.connect(keys.mongo_uri, { useNewUrlParser: true }).then(() => {
   console.log('Mongo  connected')
 });
 
