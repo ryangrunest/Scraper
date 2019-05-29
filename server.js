@@ -84,7 +84,7 @@ app.get("/scrape/:category/:criteria", function(req, res) {
 
    // Send a message to the client
     res.send("Scrape Complete");
-  });
+  }).catch(err => console.log(err));
 });
 
 // Route for getting all Articles from the db
