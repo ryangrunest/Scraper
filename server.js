@@ -2,6 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
+
+
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -10,6 +12,8 @@ const cheerio = require("cheerio");
 
 // Require all models
 const db = require("./models");
+// require mongodb_uri
+const mongo_uri = require('./keys/key.js')
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,10 +30,12 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const MONGODB_URI = 'mongodb://ryangrunest:cheese1@ds263146.mlab.com:63146/heroku_zl83lxrc';
+const MONGODB_URI = mongo_uri.mongo_uri;
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).then(() => {
+  console.log('Mongo  connected')
+});
 
 // Routes
 
