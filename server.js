@@ -26,8 +26,10 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/craigscraper'
+
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Routes
 
