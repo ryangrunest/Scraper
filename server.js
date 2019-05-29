@@ -26,7 +26,7 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/craigscraper'
+const MONGODB_URI = 'mongodb://ryangrunest:cheese1@ds263146.mlab.com:63146/heroku_zl83lxrc';
 
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
